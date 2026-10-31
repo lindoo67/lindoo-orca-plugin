@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  # Orca commit whose validator and legacy export the catalog is checked with. Bump it deliberately.
+  # Orca commit whose plugin validator is used. Bump it deliberately.
   ORCA_REF: 6dbe0d079c0ca64d6c3b6648631d79b80a8a1ff0
 
 jobs:
@@ -56,8 +56,8 @@ jobs:
           ORCA_DIR: ${{ github.workspace }}/orca
         run: node scripts/release-entry.mjs
 
-      - name: Validate catalog, releases, images and orca-marketplace.json
+      - name: Run Draw.io tests
         working-directory: catalog
         env:
           ORCA_DIR: ${{ github.workspace }}/orca
-        run: node scripts/check-catalog.mjs
+        run: node --test plugins/drawio/build/tests/editor.test.mjs

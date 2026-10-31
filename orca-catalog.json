@@ -1,15 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/stablyai/orca/main/docs/schemas/plugins/orca-catalog.v2.schema.json",
   "catalogVersion": 2,
-  "name": "Orca Official Plugins",
-  "owner": "stablyai",
+  "name": "Lindoo Orca Plugins",
+  "owner": "lindoo",
   "plugins": [
     {
       "id": "lindoo.drawio",
       "source": {
         "kind": "git",
-        "url": "https://github.com/lindoo67/orca-plugins.git",
-        "ref": "feat/drawio-plugin",
+        "url": "https://github.com/lindoo67/lindoo-orca-plugin.git",
+        "ref": "main",
         "path": "plugins/drawio"
       },
       "description": "Offline draw.io diagram editing in Orca, with multi-page XML, theme support and document synchronization.",

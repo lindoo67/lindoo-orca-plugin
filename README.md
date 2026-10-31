@@ -1,56 +1,26 @@
-# Orca plugins
+# Lindoo Orca Plugins
 
-The official plugin catalog for [Orca](https://github.com/stablyai/orca), and the source of the
-official plugins. Orca reads the catalog to show the plugins you can install from Settings →
-Plugins.
+Lindoo 维护的个人 Orca 插件市场。目前仅包含 Draw.io 插件。
 
-| Path | What it is |
+| 路径 | 内容 |
 | --- | --- |
-| `plugins/<name>/` | Official plugins, one directory each, with its own manifest and licence. |
-| `orca-catalog.json` | Read by Orca builds that support catalog format 2. Each release is pinned to an exact commit and file hash. |
-| `orca-marketplace.json` | Read by older Orca builds. Frozen: it keeps the original listings, which install from each plugin's old repository, including plugins later dropped from `orca-catalog.json` (such as Orca Navigation Shortcuts). |
-| `legacy-v1-only.json` | The ids in `orca-marketplace.json` that the export does not produce. |
-| `assets/` | Listing images referenced by releases. |
-| `scripts/release-entry.mjs` | Prints and checks the catalog release of every plugin in `plugins/`. |
-| `scripts/check-catalog.mjs` | Validates the catalog, every release, images and `orca-marketplace.json`. |
+| `plugins/drawio/` | Draw.io 插件源码与静态资源 |
+| `orca-catalog.json` | Orca catalog v2 市场索引 |
+| `scripts/release-entry.mjs` | 生成并检查插件发布元数据 |
 
-## Official plugins
+## Draw.io
 
-| Plugin | Directory | What it adds |
-| --- | --- | --- |
-| Orca Midnight | `plugins/midnight-theme` | A dark app theme |
-| Nord for Orca | `plugins/nord-theme` | A cool, low-contrast app theme |
-| Orca OLED | `plugins/oled-theme` | A true-black app theme and terminal theme |
-| Dusk & Ember Themes | `plugins/dusk-ember` | A dark and a light app theme, with matching terminal themes |
-| GitHub Light for Orca | `plugins/github-light-theme` | A light app theme with matching syntax and terminal colors |
-| Solarized Light for Orca | `plugins/solarized-light-theme` | A light app theme with matching syntax and terminal colors |
-| Dracula for Orca | `plugins/dracula-theme` | A dark app theme with matching syntax and terminal colors |
-| Gruvbox for Orca | `plugins/gruvbox-theme` | Dark and light app themes with matching syntax and terminal colors |
-| Orca Minimal Icons | `plugins/minimal-icons` | A monochrome file icon theme |
-| Solarized Terminal | `plugins/solarized-terminal` | Solarized Dark terminal colors |
-| Gleam Language | `plugins/gleam` | Highlighting for `.gleam` files |
-| Prisma Syntax | `plugins/prisma` | Prisma-aware highlighting for `.prisma` files |
-| Excalidraw | `plugins/excalidraw` | An editor for `.excalidraw` diagrams |
-| Word Document Viewer | `plugins/docx` | Read-only `.docx` pages with headers, footers, images and zoom |
-| Multipass VM Recipes | `plugins/multipass-recipes` | Disposable Multipass VM workspaces |
+在 Orca 中离线创建和编辑 `.drawio` 与 `.drawio.xml` 图表，支持多页图表、主题同步和新建文件模板。
 
-Community plugins live in their authors' own repositories. The catalog can list them, but their
-code is not copied here.
-
-- To add or update a plugin, see [CONTRIBUTING.md](CONTRIBUTING.md).
-- To learn how plugins are reviewed and taken down, see [REVIEW_POLICY.md](REVIEW_POLICY.md).
-
-Every pull request is checked by `.github/workflows/validate-catalog.yml`, which runs Orca's own
-validator at a pinned Orca commit.
-
-## Theme covers
-
-The GitHub Light, Solarized Light, Dracula, and Gruvbox covers use the same editor-preview
-layout. Their app, syntax, and terminal colors come directly from the plugin JSON files.
-With `agent-browser` and Chromium installed, regenerate them with:
+开发插件后运行测试：
 
 ```sh
-node scripts/render-theme-covers.mjs
+node --test plugins/drawio/build/tests/editor.test.mjs
 ```
 
-These are illustrative theme previews, rather than captured Orca sessions.
+更新插件发布元数据时，需要一个已安装依赖的 Orca 源码目录：
+
+```sh
+ORCA_DIR=/path/to/orca node scripts/release-entry.mjs --write
+ORCA_DIR=/path/to/orca node scripts/release-entry.mjs
+```

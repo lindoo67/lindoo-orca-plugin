@@ -11,7 +11,7 @@ import process from 'node:process'
 const CATALOG_ROOT = path.resolve(import.meta.dirname, '..')
 const CATALOG = path.join(CATALOG_ROOT, 'orca-catalog.json')
 const PLUGINS = 'plugins'
-const REPOSITORY_URL = 'https://github.com/stablyai/orca-plugins.git'
+const REPOSITORY_URL = 'https://github.com/lindoo67/lindoo-orca-plugin.git'
 
 const orcaDir = process.env.ORCA_DIR
 if (!orcaDir) {
