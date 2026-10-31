@@ -50,6 +50,10 @@ jobs:
           pnpm install --frozen-lockfile --ignore-scripts
           pnpm run build:packages
 
+      - name: Install Playwright Chromium
+        working-directory: orca
+        run: pnpm exec playwright install --with-deps --only-shell chromium
+
       - name: Check plugins/ release entries are current
         working-directory: catalog
         env:
